@@ -1,0 +1,22 @@
+Ansi Foreground colors not applied correctly when background color set in terminal
+In the terminal after setting a background color with ansi commands the forground is always black.
+VS Code version: Code 1.69.2
+Doesn't reproduce on Mac, so I suspect it's a conpty issue
+@meganrogge looks like the min contrast setting
+This is by design as we've have changed the default minimum color contrast to be 4.5 for accessibility reasons, you can change it to use original theme colors by setting "terminal.integrated.minimumContrastRatio": 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,19 @@
+Terminal doesn't work
+Terminal doesn't work and there is no error message after upgrade.
+
+Yesterday, there was an upgrade. I tried to restart my vscode to apply the upgrade. After the restart, the terminal stopped working.
+So, how do i get the detailed error information?
+Here are system info and extension info.
+The error "Too much data" will be reported when I try to use submit bug, so I paste the information here.
+Remote settings:
+A/B test info:
+Can you do a trace log while creating a terminal? https://github.com/microsoft/vscode/wiki/Terminal-Issues#enabling-trace-logging
+/label info-needed terminal
+Thanks for your reply.
+
+I found this error log in the file remoteagent.log.
+
+It seems that this folder is occupied by other users. And when I tried to delete this folder and reload vs-code, the terminal resumed.
+So, how can I change the default path for zsh? or do you have some suggestions to avoid this issue?
+I'm getting the same error when connecting to a multi-user system with the ssh extension.
+/duplicate #157611

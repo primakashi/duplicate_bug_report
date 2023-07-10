@@ -1,0 +1,21 @@
+Commit button when there are no commit messge
+Does this issue occur when all extensions are disabled?: Yes/No
+
+VS Code Version: 1.69.0
+OS Version: win10
+Hello,
+In the new update, when i use Source Control and try to commit an blank commit, It gives me an error that does not explain the error.
+the git output
+Please supply the message using either -m or -F option.
+In previous versions it gives a prompt to insert the message
+I am having the exact same issue. I could use blank commit messages last week but today I am getting the same exact error. If I have a commit message I am able to do the commit.
+
+VS Code version: 1.69.0
+OS: Windows 11
+Please try the settings change suggested at #154449 (comment)
+
+If this works you can either keep that setting long-term or else revert it after the upcoming 1.69.1 recovery release ships.
+Another option would be to use the latest Insiders release which contains a fix for this issue.
+The fix will also be included in the Stable recovery release that is planned for later this week.
+This issue has been fixed both in the latest Stable and Insiders releases.
+Closing as duplicate of #154449.

@@ -1,0 +1,13 @@
+Top line of terminal deleted when running command
+Does this issue occur when all extensions are disabled?: Yes
+
+VS Code Version: 1.70.2 (user setup)
+OS Version: Windows_NT x64 10.0.19044
+Steps to Reproduce:
+
+Run commands on the terminal until the top of the terminal is full
+Run another command. The top line will be deleted
+Scroll up to see that the previous line is deleted
+Please provide a a gif illustrating the problem (attaching images won't work via email, you need to go to github.com). See this wiki page for more general info on how to report actionable terminal issues.
+/label info-needed terminal
+/duplicate #134448

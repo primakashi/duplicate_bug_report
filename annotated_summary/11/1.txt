@@ -1,0 +1,24 @@
+Bash shell script issue with "%" sign 
+whenever I try to execute a command that has the % sign I get one of those two print errors:
+I am running VS Code on a Windows host with a WSL (Ubuntu) remote session. 
+I also do not get the error if I go and run the same command in a Windows Terminal bash shell from the same folder and same user inside my WSL environment.
+I noticed the error started happening after the July 2022 update. 
+VS Code version: Code 1.70.0 
+Getting a similar issue on Mac with the latest July update.
+Yes disabling shell integration will fix this until we have resolved it terminal.integrated.shellIntegration.enabled
+Did you notice https://code.visualstudio.com/updates/v1_70#_shell-integration-enabled-by-default? Please try disabling shell integration to see if this change to the default has triggered your issue.
+@Tyriar, there's actually a simpler way to fix this issue than escaping the % char ending up in the printf format string, by passing it as a separate parameter to printf.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

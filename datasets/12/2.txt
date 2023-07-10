@@ -1,0 +1,90 @@
+Ability to easily toggle the old merge view (3 Way Merge Editor)
+(I searched through everything with merge editor and didn't find this feature. Hope I'm not duplicating.)
+I really like this interface for new merge view, but there are scenarios in which the old view is beneficial. I would love the ability to be able to easily toggle between the 3 way merge editor and the old merge editor.
+Use case:
+A changelog file which is modified regularly, but has persistent differences between two branches. In this case, user needs to check all the checkboxes.
+And with small screen, 3 way merge is very hard to use as it needs to fit 3 windows now.
+The new git merge gives me a lot of problems, how can I get the old one back?
+EDITED: to remove emotional language I wrote when I was frustrated and upset.
+"hate" is a strong word :-) People are putting a ton of their personal time and energy into this 100% free tool.
+You can go into settings and change it back quite easily:
+My original post is for being able to toggle back and forth easily. From the sounds of it, you just want to stay with the old version and not a toggle option.
+The legacy merge editor should at least be made available for use when viewing a conflicted file in the editor (file selected from Explorer), and the new 3-way merge editor be used when in "merge mode" (file selected from Source Control).
+Instead neither is used when viewing a conflicted file (file selected from Explorer).
+The following settings would go a long way to alleviate some of the pain:
+git.mergeEditor (boolean) ✅
+True: use 3-way merge editor for Source Control
+False: use legacy merge view for Source Control
+editor.mergeEditor (boolean)
+True: use 3-way merge editor for Explorer
+False: use legacy merge view for Explorer
+A nice-to-have would be an Editor Command (in Command Palette) to switch between the 3-way and legacy merge editors for the currently visible file, but I understand if this isn't a trivial request :)
+Hi @gnowland!
+I thought toggling merge editor easily and choosing which merge editor to use in explorer are different issue, so I made a new issue.
+Also, whether toggling feature is released or not, there should be any merge editor to show conflicted file from explorer.
+Current behaviour (using nothing when viewing conflicted file from explorer) seems like a bug, so it's different from this feature request issue.
+We will just enable both the old decorations/code-lenses and the new merge editor, which I think most of the complaints are about.
+Thus, when you don't open the file explicitly through the SCM view, everything stays as is.
+Let's track the toggling of the new merge editor here.
+I totally agree, and appreciate the edit of the original message. But I'll admit that it's been a long time since I got so frustrated with a change in UI. And absolutely everyone I talked to feels mostly the same, even if asked open-ended about the new merge editor.
+So while I highly appreciate the personal time invested, it might be less frustrating for everyone if we could get to know what has been wrong with the previous UI (that seems to work just fine for many people) to maybe see the advantages this new approach delivers?
+I've scanned some related issues and the Release Notes of 1.70, but couldn't find any details about why this tool is better than the previous one for most users?
+It is one of the most upvoted feature requests.
+Please try out the latest insiders version of VS Code, and let us know what you think!
+Something that confuses me is that the old experience didn't offer much that could be missed. What did cause you this frustration?
+Even without the decorations and the code-lens, you can just edit the markers by hand.
+Looking at the screenshot in the feature request and a gif of someone experienced with the merge editor using it, I think I can guess what's happening here: Different requirements and expectations of the same tool by different user groups 😅
+Some comments on how I use the (old) tool:
+Something that confuses me is that the old experience didn't offer much that could be missed. What did cause you this frustration?
+I almost never do complex merges and don't often work with people that do. When I resolve merge conflicts they can usually be resolved by "Accept incoming" or "Accept current". On the rare occasion this is not a good solution, I prefer editing the code in-line.
+Both of those use-cases are perfectly supported by what you call "the old experience". I'd describe it as some handy buttons and UI replacing the ugly conflict markers and helping me to move on quickly. When I first started using VSCode it felt like magic, since I had been editing code around conflict markers manually before that.
+What I need most is the diffing, seeing clearly which lines come from which source. I realize now, that many people would call "lacking" what I find very useful: everything happens in one editor – it's basically the same experience as editing a file with markers, but much nicer.
+Finally, I have to admit that if a merge gets too complex, I'd usually prefer re-applying my changes on top of incoming changes.
+My learning
+I can agree that one might need a more advanced tool if one does complex merges on a day to day basis. 😬 I didn't consider that earlier and I have no idea how the ratio is between people doing "paper scissors" vs. "surgical knife" conflict resolution.
+What to do?
+How do you usually solve conflicts for different sets of requirements (pun intended)? I'm wondering if this is team size-specific, language-specific, coding level-specific?
+From what I understand off of your latest comment, the new tool will be optional and power users will be able to find it quickly. For me this would fix the "out-of-the-box" experience, while keeping this tool for everyone who needs it.
+And I will stop talking now... 😅
+@te-online thanks for your thoughts, really appreciate that!
+I still believe the new merge editor can replace the inline experience if the screen is big enough, without loss of productivity for simple cases, but with enhanced productivity for more complex cases.
+We are working on that, but rest assured, the inline experience will stay and you will be able to use both experiences at the same time!
+I wonder, do you think someone has to be experienced to do what is demo'd in that gif?
+If so, which step do you find confusing for non-experienced users?
+For most of the conflicts I run into, I actually have to combine both sides. Most of the time this is trivial though, e.g. when one sides deletes an import statement and the other sides adds one below the deleted one. This requires manual work in the inline experience, but is just two clicks in the new experience.
+@hediet way over-delivered on this in the new release 1.71.0, just read the release notes. Fantastic work! 👏
+@gnowland thank you very much on the kind words.
+Everyone else that maybe disabled 3-way merge - it would be great if you give this another try since the last update and do let us know if the experience got better. We are very much open for feedback on how to further improve it and there are some things that we are already working on for the next release. Thanks
+My biggest issues off the top of my head were those:
+I could not see the checkboxes. They were invisible to me. I only started noticing them when I saw a screenshot of one of them checked. They just blended in with the rest of the margin. (I think this might be improved in the new version, I've only seen it in a light theme so far and I'm using the standard dark theme)
+I had no idea how the bottom result came to be, it looked random to me
+The floating button in the right bottom corner saying "Accept merge" was the only CTA I could see, but I did not want to accept the merge – I wanted to select which change I'd like to keep
+Left and right panels looked like editors, but they were in fact not editable
+I think this is what I find appealing about the inline experience – "manual work" here means that I can edit the code inline (a thing I know well 😅). Using the merge editor I have to "learn" how to use it, because I usually don't use tools like it. (And I don't think it's bad UX for a professional tool to have certain basics you need to learn). Once I find a good opportunity, I'll try it again.
+In the end it might boil down to the fact that being confronted with merge conflicts is usually a stressful thing. Most people prefer to not have merge conflicts 😅 And being presented with an entirely new UI in this situation was probably the thing that held me back from exploring it a bit more.
+I really love the new approach of adding the floating button to switch to the editor ☺️
+If visible enough, I think it will be more successful in convincing people to try it out when they think it is convenient, possibly resulting in more people liking it, because it wasn't forced on them.
+@te-online thank you for your feedback! It really helps us to understand what users struggle with.
+I feel very strongly about this as well. The fact that it's all in one file, I can move lines around, make any adjustments that I need to, and then save, just like I would with any file editing, is why I love dealing with merge conflicts in VS Code specifically. I actively do not deal with merge conflicts in any other program if I can avoid it, because I like the in-line VS Code approach so much better.
+I want to express some concern about this kind of thinking. Not everyone has (or wants to have) large screens. This can be anything from personal preference, to working on a laptop because you're working remotely, to working with whatever you can afford (ie: students, devs just starting out, etc..). Relying on folks having large screens in order for the feature to be useable/useful/effective is... not great.
+I recognize the desire to support workflows and users that were not supported well before, I think that wonderful. And it's clear that there are folks for whom the new UI will be a really good improvement. But please, please, please, don't ever get rid of the in-line, one file, approach. Let us pick and choose which editing experience we prefer. Because some of us really like what was there before.
+@MSpake thanks for your feedback. I agree it is personal preference. And that is why switching between the two should be pretty straight-forward. From the merge editor there is a title action to go the basic one, and from the basic one there is a blue button to go the 3 way view.
+There is also a setting to control the default. And we will soon introduce a banner to make changing the setting more discoverable.
+The point is that users should easily choose which mode works better for them. Thanks
+when it's an easy this or that the newer merge editor is nice, but when I need parts of both (ex: 2 developers adding different attributes to an html element or calsses) then half my screen has been consumed and I need to edit the in-line anyway.
+luckily from reading here I saw that if i hit the small view source button it takes me to the file instead of the merge editor. easier selecting the default behavior would be nice though since i too am of the thought the in-line is faster (otherwise i'd just use the online merge tools wherever my repo is hosted in pr and not be opening the conflict in vscode)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

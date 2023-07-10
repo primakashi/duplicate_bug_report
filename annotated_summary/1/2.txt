@@ -1,0 +1,4 @@
+Select Default Profile fails to locate Git Bash and include as dropdown option.
+So I tried to create a new profile by pressing ctrl+shift+p then terminal said I already have a profile with Git Bash name.
+Existing issues and an answer on stackoverflow seem to suggest that this problem occurs only when your Git Bash is not installed at the standard location (C:\Program Files\Git\bin\bash.exe) and the profile is named exactly "Git Bash".
+I replaced the key-value pair above with the following key-value pair. Restarted VS Code, activated the command palette, selected Terminal: Select Default Profile and Git Bash appeared as a dropdown option. Selected Git Bash as the default terminal. Ran python file. Terminal pane opened Git Bash and code executed successfully. 

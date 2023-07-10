@@ -1,0 +1,37 @@
+Terminal colors regression
+Does this issue occur when all extensions are disabled?: Yes
+Version: 1.66.0-insider
+After the most recent VSCode update on the Insiders track, my terminal foreground colours have changed:
+This is what they looked like before, and what they look like on the stable track:
+I can confirm this issue persists when starting code with --disable-extensions. Could this be related to the work @daviddossett has been doing?
+This is by design as we've have changed the default minimum color contrast to be 4.5 for accessibility reasons, you can change it to use original theme colors by setting "terminal.integrated.minimumContrastRatio": 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

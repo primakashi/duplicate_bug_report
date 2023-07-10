@@ -1,0 +1,10 @@
+useEditorAsCommitInput setting generates code 500 error
+Steps to Reproduce:
+Make changes to a file, stage the file
+Make a commit with an empty message
+Get a Git: Bad status code: 500 message box.
+Previously I would get quick textbox allowing me to enter a one line message
+Fix: Set useEditorAsCommitInput to false.
+In the new update, when i use Source Control and try to commit an blank commit, It gives me an error that does not explain the error.
+This issue has been fixed both in the latest Stable and Insiders releases.
+glad to hear that disabling git.useEditorAsCommitInput resolved this issue.

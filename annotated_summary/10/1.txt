@@ -1,0 +1,32 @@
+Sticky Scroll: Go to definition jumps to definitions but stay hidden behind sticky scroll layout
+VS Code Version: 1.70.0
+Steps to Reproduce:
+Have a definition just hidden under the sticky scroll layout.
+If you try to jump to that particular definition the cursor jumps to that position but the definition stays hidden under the layout.
+It should be either disabled or maybe better have very limited context (a single line max?)
+This is a general problem with revealing ranges in the editor. 
+In the original screenshot, I also noticed that line 153 is repeated 3 times, I think that is already solved on main via 2ecea7f.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

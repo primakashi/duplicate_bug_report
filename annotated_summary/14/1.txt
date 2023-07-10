@@ -1,0 +1,37 @@
+Searching keyboard shortcuts with 'Record Keys' does not include chords using that keybinding
+As a default, it might be better for 'Record Keys' to use the un-quoted search string, so chords would show up as well.
+VS Code version: Code 1.70.2 
+use the "Record Keys" feature
+press cmd+K
+only "Clear Terminal" is shown
+all coord'ed keybindings, like Cmd+K, Cmd+S etc are missing
+When record keys is used, commands with entered keys are shown. It is exact search. To relax it remove the quotes. 
+Record Keys is also a helper to make typing shortcuts simple. Stll, staying in your logic, "Cmd+K" is a shortcut which enables the 2nd plane of shortcuts
+Notice that only shortcuts using the exact binding "cmd+k" show up, not all the bindings that start with that prefix.
+If you remove the quotes (cmd+k), then all matches show up, including chords.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

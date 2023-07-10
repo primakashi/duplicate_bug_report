@@ -1,0 +1,10 @@
+Underscores (_) in integrated terminal are surrounded by black box
+VS Code Version: 1.70.2
+Steps to Reproduce:
+Open integrated terminal in vscode running on Void Linux
+Type an underscore (_)
+I'm not the original reporter but turning the GPU acceleration off or setting it to canvas solves this problem.
+A better workaround is to use a different font, such as Fira Code, Hack, Iosevka, etc.
+The last update resolved this issue.
+
+

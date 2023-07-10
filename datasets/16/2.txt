@@ -1,0 +1,32 @@
+Option to configure VSCode settings in sub-folders
+I wish to configure VSCode settings in sub folders, and not only in the root directory.
+For example, I have a monorepo project where one of my application is a backend one implemented with Nest.js.
+So I have configured in the root folder, within the .vscode/settings.json file the material-icon-theme.activeIconPack option.
+However, I also have a react application with redux. So I can't have the icons for redux for example because the material-icon-theme.activeIconPack option has only 1 possible value.
+Did you try setting up a multi-root workspace in which each of your applications is a separate root? Each root can have its own .vscode/settings.json in which folder-level settings can have different values.
++1:
+One scenario where i find myself wishing this existed is to enable editor.codeLens for only Test projects. They're the only context in which i use CodeLens, which exposes "Run Test" and "Debug Test" for each test method. Disabling it globally and re-enabling it in /Tests/.vscode/settings.json would be great - much better than constant toggling.
+
+As for mutli-root workspaces - i've used VS Code for years and am quite comfortable with it, but i don't use mutli-root workspaces. I've read about it, understand it, but the added overhead/abstraction (small as it may be) is antithetical to my usage of VS Code. On the other hand, overriding a global (or single-folder workspace) setting by adding a one-liner settings.json to a subfolder is as simple and intuitive as it gets. 👍
+As far as I understand this VSCode workspace allows me to set only folders as root which are in the root level. But, my folders in which I need this separation are inside an other folder.
+
+VSCode workspace would fit for the following case:
+
+MAIN_ROOT:
+ROOT1
+ROOT2
+ROOT3
+
+But this is my case:
+
+MAIN_ROOT:
+apps/
+ROOT1
+ROOT2
+ROOT3
+
+I want to configure each ROOT(x) with other VSCode config
+No, each root folder in your MR workspace can be located anywhere. They don't have to be siblings, nor even in the same subtree.
+/duplicate
+
+#32693

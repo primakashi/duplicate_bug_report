@@ -1,0 +1,35 @@
+bash: printf: `C': invalid format character error in bash terminal
+Type: Bug
+I am running VS Code on a Windows host with a WSL (Ubuntu) remote session. I am seeing the error "bash: printf: `C': invalid format character" in bash terminals inside the IDE. I don't get the error every time, but I'm seeing it frequently for various commands and tools. When I get the error, the command also seems to hang until I kill it. I also do not get the error if I go and run the same command in a Windows Terminal bash shell from the same folder and same user inside my WSL environment.
+I noticed the error started happening after the July 2022 update. There was a new feature automatically enabled that does some kind of shell integration and decorates command lines with a default/success/error icon. I am suspicious if this is causing the new error. I have not seen the error when having the decorators disabled.
+I can include more information, logs, settings, environment, etc. if needed but I am not sure what else is relevant. Below is the information from the generated issue report.
+VS Code version: Code 1.70.0 (da76f93, 2022-08-04T04:38:16.462Z)
+OS version: Windows_NT x64 10.0.19044
+Modes:
+Remote OS version: Linux x64 5.10.102.1-microsoft-standard-WSL2
+Remote OS version: Linux x64 5.10.102.1-microsoft-standard-WSL2
+Running with "set -x" shows the command line isn't being escaped during a call to printf. Simple test case:
+$ date +%m
+bash: printf: `m': invalid format character
+$ unset PROMPT_COMMAND
+$ date +%m
+08
+Getting a similar issue on Mac with the latest July update. Glad to know it's not just me.
+Yes disabling shell integration will fix this until we have resolved it terminal.integrated.shellIntegration.enabled
+/duplicate #157226
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

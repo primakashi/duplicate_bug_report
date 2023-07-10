@@ -1,0 +1,50 @@
+Trust dialog prompt appears even when disabled in settings
+Type: Bug
+Prerequisites:
+Have the setting "Security -> Workspace -> Trust: Enabled" active, and the setting "Security -> Workspace -> Trust: Startup Prompt" set to "never".
+Steps:
+Open Visual Studio and wait a moment.
+Expected result:
+No trust dialog should appear.
+Actual result:
+The trust dialog appears.
+Basically I can't make the trust dialog not appear every time I open VS Code or when I open a workspace. This has started happening when updating to version 1.71.0, it didn't happen with the previous version (I can't remember which one, but it shouldn't have been a very old one). However, this has happened at least once before, after some update (I can't remember which); I only was able to fix it by reinstalling VS Code, no update of the settings managed to do the trick. I didn't change any setting (or basically anything) before the issue started happening again.
+VS Code version: Code 1.71.0 (784b017, 2022-09-01T07:36:10.600Z)
+OS version: Windows_NT x64 10.0.19044
+Modes: Restricted
+Sandboxed: No
+I tried to reinstall vscode, but I still see the trust pop-up window.
+@guation, this workspace trust prompt is coming from the tasks service. As the dialog states, listing and running tasks can result in workspace code being executed so the task service asks for workspace trust. Assuming that your trust the workspace files, if you click "Trust Workspace & Continue" you should not see this dialog again.
+Adding @meganrogge to see if there is a way to reduce the number of prompts.
+@lszomoru So the "Trust: Startup Prompt" setting actually has no effect on the prompt triggered by tasks, and there's no equivalent setting to disable it (or at least to disable listing tasks)?
+I believe this is already fixed, can you see if you can reproduce in the Insiders build?
+/label info-needed
+Yes, I can reproduce it in the insiders build, this version:
+/duplicate #156183
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

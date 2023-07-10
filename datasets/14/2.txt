@@ -1,0 +1,24 @@
+When using record keys search for individual keys
+use the "Record Keys" feature
+press cmd+K
+only "Clear Terminal" is shown
+🐛 all coord'ed keybindings, like Cmd+K, Cmd+S etc are missing
+When record keys is used, commands with entered keys are shown. It is exact search. To relax it remove the quotes. Let me know if it works.
+I understand that, but I saying that exactly that behaviour is misleading. Record Keys is also a helper to make typing shortcuts simple. Stll, staying in your logic, "Cmd+K" is a shortcut which enables the 2nd plane of shortcuts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

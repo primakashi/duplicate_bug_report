@@ -1,0 +1,36 @@
+New rebase conflicts resolution completely broken. Diff worse than before.
+I rebase a branch with a single word different, I get everything as a conflict and can't see where is the difference is.
+The diff engine is seriously damaged...
+3-way merge
+only user_rst vs usr_rst
+2-way merge
+I should see only the line with the user_rst shown as a conflict, not the tens of lines I currently have.
+VSCode should also try to be coherent on naming, 3-way doesn't exist even though it's named like that 3-way merge in the release note and everywhere else.
+Even disabling the Merge Editor still opens a window with the conflicts...
+Yep completely broken for me too!
+@alexisfrjp I just reverted to 1.69.0 and all is working fine again!
+Unfortunately you need to reload/restart VS Code after toggling that setting.
+Can you share details of your merge conflict?
+/duplicate #156608
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+Open file and then search opens the wrong find widget
+Cmd+F no longer goes to active editor
+Click on a file in File Explorer
+Ctrl/Cmd+F
+1.69.2 Opens the find widget in editor
+1.70 Opens the find widget in File Explorer
+It breaks workflows of opening files and searching for content.
+Some ideas:
+gather more feedback next month from users to see how bad it is
+document in the release notes how to unbind this keybinding [1]
+work on finding other ways how to make the find widget discoverable
+ You can also double+click in the explorer to focus the editor you opened, but this also pins that editor.
+Rather now opens the find widget in the explorer. This is quite a shift and breaks muscle memory at least for me.
+Removing the default Ctrl F keyboard shortcut or changing it to something else isn't appealing since it's such a common pattern for the find widget (editors, terminals, notebooks).
+Here's how you can disable Ctrl F in lists, defaulting to the previous behavior:
+The tricky thing about using "ctrl+f" for this feature is that it does not search (does not "find") anything — it does not really respect "Find" semantics — which may lead to some confusion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+Terminal: Select Default Profile fails to locate Git Bash and include as dropdown option
+VS Code Version: 1.70.2
+Steps to Reproduce:
+Install gitforwindows (git version 2.37.2.windows.2)
+CTL-SHIFT-P to activate the control palette
+Select Terminal: Select Default Profile
+Git Bash is not listed in dropdown
+File > Preferences > Settings > terminal.integrated.profile.windows
+Git Bash "source" is listed but is ignored.
+I replaced the key-value pair above with the following key-value pair (note that the path could vary if a different git for windows install location was chosen):
+Restarted VS Code, activated the command palette, selected Terminal: Select Default Profile and Git Bash appeared as a dropdown option.
+Issue reported earlier but apparently not resolved: #126023, #123684
+Perhaps we should be showing a warning when Git Bash is not detected at the standard paths we check with instructions or a shortcut to configure it. 
+Git Bash is not visible when try to select default terminal profile
+And I opened VsCode again, But it is still saying I don't have git bash in terminal profile and when i click configure buttons of the profile or try to add it from settings.json they say A terminal profile already exists with that name
+It didn't happen in the previous version so I think it is happening because of the Latest version glitch. 
+And after updating to 1.57.0 Git Bash terminal profile disappeared again. 
+I managed to fix that by renaming "Git Bash" profile to "Git_Bash".
+Restarted VS Code, activated the command palette, selected Terminal: Select Default Profile and Git Bash appeared as a dropdown option. 
+Selected Git Bash as the default terminal. 
+Ran python file. 
+Terminal pane opened Git Bash and code executed successfully.

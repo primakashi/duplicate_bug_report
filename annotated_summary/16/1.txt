@@ -1,0 +1,2 @@
+I was wondering if it is possible for VSCode to pick up on multiple .vscode/settings.json
+urrently we are working on a multi root workspace where you can have multiple root folders. This feature is available only in insiders. See #28344 for more details. 

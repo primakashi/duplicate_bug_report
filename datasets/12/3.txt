@@ -1,0 +1,45 @@
+File from Explorer doesn't highlight merge conflict when 3-way merge editor is enabled
+Does this issue occur when all extensions are disabled?: Yes
+VS Code Version: 1.70.0 (system setup), commit: da76f93
+OS Version: Windows 11 21H2 (22000.832)
+Steps to Reproduce
+When you enable 3-way merge editor(i.e. set "git.mergeEditor": true), and open conflicted file from Explorer, merge conflict isn't highlighted and it looks like plain text.
+Expected behaviour
+Merge conflict should be highlighted like the legacy merge conflict view.
+Or, @gnowland suggested in #156608 (comment) that user should choose how to see conflicted file from explorer via settings.
+@hediet this breaks merge conflict resolution in github.dev, which generates conflict markers for conflict resolution. Perhaps we should get Remote Repositories migrated to use the new merge editor now that we have support for opening the merge editor from extensions, but in the meantime this is a regression. I'd expect the merge conflict decoration extension to continue to function even if 3wm is enabled.
+I have this issue too .. I had installed (and removed gitLens) .. i have uninstalled / reinstalled vscode from the website but it still hasnt fixed the issue
+it still hasnt fixed the issue
+same issue
+Disabling Git: Merge Editor turns on the highlighting back
+/duplicate #156608
+Actually to resolve the conflict, I like the previous UI than the current of v1.70.1. So How can I revert to the old one? Generally when modified some lines, comparing horizontally is easier than vertically I thought.
+The issue is that the VSCode's team disabled this function.
+Now you are supposed to do merge conflicts in your "Source Control" tab. Here when you click on a file with conflicts, it opens a brand new merge conflict system.
+If you don't like this system, you can disable it, which enables back the old function by disabling "Git: Merge Editor" in your preferences as @carloscbl said.
+This is a duplicate of #156608.
+Confirmed as well. I had no highlighting, found this thread.
+Didn't find any sort of "git.mergeEditor" setting in my settings.json.
+Added: "git.mergeEditor": false,
+As soon as I saved it, the old green and blue highlights showed up.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

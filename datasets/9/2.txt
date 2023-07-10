@@ -1,0 +1,34 @@
+Cmd+F no longer goes to active editor 
+Rather now opens the find widget in the explorer. This is quite a shift and breaks muscle memory at least for me.
+I don't see a great option than to suggest to change/unbind the keyboard shortcut in your own preferences. Removing the default Ctrl F keyboard shortcut or changing it to something else isn't appealing since it's such a common pattern for the find widget (editors, terminals, notebooks).
+Here's how you can disable Ctrl F in lists, defaulting to the previous behavior:
+    "key": "ctrl+f",
+    "command": "-list.find",
+    "when": "listFocus"
+I am a bit surprised that this find widget doesn't open when I just start typing in list as is was with
+"filter on type" that was replaced by this find widget
+@IllusionMH I think the intent was to align with standard OS behaviour, you can still type to find (even more than one character) and it will highlight the matching entry, but for the more complex find widget, you need to explicitly bring it up.
+@joaomoreno have you considered adopting a different shortcut that is commonly used for such feature e.g."key": "/"?
+The tricky thing about using "ctrl+f" for this feature is that it does not search (does not "find") anything — it does not really respect "Find" semantics — which may lead to some confusion.
+E.g. it will not find a file if it is under a folder that has not been previously opened.
+On the first screenshot here, I toggled "Filter", but it has not found a file that was just one-level deep. It only finds this file if I open its parent folder first.
+Only one file found:
+But there are actually two files:
+I don't mind if Ctrl + F opens find when the focus is on the file navigator, so removing the keyboard shortcut entirely feels like overkill. but if I click on a file to open it, the focus should go to that newly opened file imo so that ctrl+f works in the new file immediately instead of also needing to click in the editor first.
+I will disable the shortcut for now but just focusing the editor when opening one would solve 99.9% of my headache with this and allow me to keep the feature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

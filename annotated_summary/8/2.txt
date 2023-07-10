@@ -1,0 +1,25 @@
+Converting a single folder to a workspace causes the extension host to restart, which causes any webviews to become detached from the extension that is running them
+Repro steps in extension sample:
+Use webview-sample extension sample.
+Add code to close panel on deactivate:
+export function deactivate() {
+	CatCodingPanel.currentPanel?.dispose();
+}
+open a single-root workspace and start the extension sample (should have the webview appear).
+Add another root to the workspace. The messages should stop (since the extension deactivated), but the panel still exists.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

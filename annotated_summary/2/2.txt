@@ -1,0 +1,9 @@
+VS Code Deleted After Windows 25201.1000 Update
+After restarting, the VS Code shortcut in my toolbar was replaced by the generic unknown windows application icon. 
+Sounds like you told it to install the patch "Later". 
+So after the reboot it messed up patching.
+After reinstalling VS Code to same directory all my extensions are working and code I was working on last loaded right where I left off thankfully.
+I've now downloaded and reinstalled VS Code and everything seems to be fine, but just thought you might like to know.
+
+
+

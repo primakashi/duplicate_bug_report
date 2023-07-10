@@ -1,0 +1,22 @@
+Git amend produces 500 error
+GitHub Commit error after June VS Code update
+Steps to Reproduce:
+Create a commit
+Add some changes
+Commit amend the commit (... > Commit > Commit All (Amend) )
+Running git commit --amend from the command line works
+Yes, unchecking the Git: Use Editor As Commit Input setting fixes the issue
+@DevelPaga, glad to hear that disabling git.useEditorAsCommitInput resolved this issue.
+After reading the documentation I now understand the behavior :)
+https://code.visualstudio.com/updates/v1_69#_author-commit-message-using-an-editor
+so just untick this if you want the old experience
+Thanks a million, this recent change they made was driving me crazy for the past 2 days. I use custom hot keys to commit and push my code, so I expect the text box to appear and ask for a message.
+Fix:
+Set useEditorAsCommitInput to false.
+GitTest is a repo initialized FROM VSCode => Works.
+GitTest2 is a repo initialized from a dos box. => Fails.
+The VSCode created one has a user defined in the config while the the Git created one doesn't have a user defined.
+and indeed setting the user in the config fixes the issue.
+In previous versions it gives a prompt to insert the message
+This issue has been fixed both in the latest Stable and Insiders releases.
+

@@ -1,0 +1,45 @@
+GitHub Commit error after June VS Code update
+Issue Type: Bug
+
+After updating VS Code with the June update, I get an Error (Bad status code: 500) when I try to commit my code udpates to GitHub.
+I have the same issue. I can commit by doing "git commit -m "message for the commit". I guess the issue is that when you just do "F1 - > commit" it doesn't give you the option to supply a message and therefor you get the error " Please supply the message using either -m or -F option."
+After reading the documentation I now understand the behavior :)
+https://code.visualstudio.com/updates/v1_69#_author-commit-message-using-an-editor
+
+so just untick this if you want the old experience
+I have been trying to reproduce this issue in-house without much luck. Would you be able to create a gif recording (https://gifcap.dev) while reproducing the issue? Thank you very much in advance!
+ah thank you so much I have been trying to figure out how to fix this 500 error code for 2 days! Go figure all you have to do is untick a box....
+@CryptoCherie, apologies for the caused inconvenience. While toggling the setting to disable the new flow is a valid workaround, I do want to get to the bottom of the root cause and fix it. Are you able to reproruce the 500 error in all repositories or only some? If only in some, is there anything specific about those repositories? Could you please share a recording (https://gifcap.dev) when you reproduce the issue? Thank you!
+I get this pressing the new commit button with no text in the textbox using a remote environment where the other side has git version 2.7.4.
+
+It hangs indefinitely, and to recover I need to reload the window.
+
+Ideally, if there I'd no text I'd get a pop-up warning like if I try to commit with no staged changes.
+@MarkAHamann, thanks for the additional details.
+Which extension are you using to connect to the remote environment? Remote-Containers? Remote-SSH? Remote-WSL?
+Remote-ssh. Windows 10 at my desk connected to Linux beast somewhere in the building.
+Also, it seems to be opening .git/COMMIT_EDITMSG into my open editors. Empty, of course, because I didn't have a commit message in the text box.
+@MarkAHamann, if you do not specify a commit message in the input than VS Code will open the COMMIT_EDITMSG file in an editor tab. you can use that to enter the commit message and close the editor to complete the commit operation. Closing the editor when it's contents are empty will cancel the commit operation. Is that the behaviour that you are seeing?
+Hmm... I hadn't really noticed that new file opening up until later. I just did a commit, got the open file, added a message, hit ctrl-s to save, and now it's still hung indefinitely.
+
+Wait, I just hit the little x to close the editor and it completed.
+
+OK, I see what's going on now. Working as expected (though with new expectations). Pebcak.
+[makz159] Thanks a lot my friend @makz159, I could solved this bug c.
+@lszomoru See attachment for my gif recording while I reproduce the error. I've got a fairly streamlined setup. I don't have many VS Code extensions beyond Python, Jupyter and Git History. I haven't done any further attempts to rectify the problem since I filed the report last night; however, I now realize the problem seems to stem from my neglect to include a comment with my Commit. It would be nice if VS Code could fail more gracefully though. Thanks for your support.
+@lszomoru I confirmed the Commit proceeds successfully if I simply enter a message in the empty Message field directly above the Commit button before I hit the Commit button.
+
+Do you want me to close this ticket or leave it open to track graceful resolution of the error reporting?
+@Schlermie, thank you very much for the recording. We should keep the issue opened as this is clearly a problem that I have to address. One should be able to go through the commit flow even if a commit message is not provided as illustrated in the release notes.
+@Schlermie, could you please reproduce the problem again, and then invoke the Developer: Toggle Developer Tools command and share the contents of the console? I have tracked down that code that fails but I need to understand the exact error that occurs as currenrly we only log the status code. Thank you!
+I have further looked at the code and my current hypothesis is that we are failing to open the COMMIT_EDITMSG file. At the moment we are assuming that the last argument passed to git-editor-main.ts is the path of this file but I think that assumption might be wrong. I am looking at testing out the fix first in Insiders before we port it to Stable so that it is included in the upcoming recovery release.
+
+@Schlermie, could you please check the version of git that you are using by running git --version? thanks!
+Could #154503 be related to this one?
+Quick update on this issue. I was able to track down the root cause of this failure to cases in which the repository path contains spaces on the path. The fix will be included in tomorrow's Insiders release (2022-07-12), and the Stable recovery release scheduled for later this week. Apologies for the inconvenience caused.
+@lszomoru closing this for verification since the associated PR was merged.
+worked for me. thanks.
+@rubensa, are you able to reproduce the problem with the latest Insiders release?
+The editor (COMMIT_EDITMSG) is opened with previous commit message but I need to click on the "Accept Commit Message" icon.
+If I click on the "Discard Commit Message" icon the commit is cancelled with message "Commit operation was cancelled due to empty commit message." (I expected it to simple use the already commited message, as I'm amending to that).
+Thanks @makz159 , its resolved at my end

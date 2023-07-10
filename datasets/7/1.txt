@@ -1,0 +1,48 @@
+View locations reset 
+I think this happened because I was testing profiles. My view locations have been reset. I have Gitlens installed, and I had a few of the Gitlens views in their own view container. Now, they're back in their default view container (scm).
+May I know if you are able to reproduce? If so can you please provide steps?
+Found an easy repro:
+Have 2 windows open (not sure if this step is needed)
+Disable profiles in settings (not sure if this step is needed)
+Restart.
+Enable profiles in settings
+Restart
+In one of the windows run "Settings Profiles: Create an Empty Settings Profile" and create a new empty profile
+See that your new profile gets used in just that window ✅
+In that same window run "Settings Profiles: Switch" and choose your default profile
+See that your default profile is applied, but view locations are reset 🪲
+/duplicate
+Thanks for the steps. I think you might be hitting this - #154090
+@sandy081 I took a look at the steps in the duplicate issue, and it says that reloading fixes the issue. Reloading does not fix my issue.
+I am planning to look at #154090 next milestone and during then I will cover this too.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

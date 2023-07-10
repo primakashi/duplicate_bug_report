@@ -1,0 +1,37 @@
+Black blocks in terminal at every underscore
+VS Code Version: 1.70.2
+Steps to Reproduce:
+Open integrated terminal in vscode running on Void Linux
+Type an underscore (_)
+Edit:
+Updated to 1.70.2 and issue still remains
+I'm not the original reporter but turning the GPU acceleration off or setting it to canvas solves this problem.
+ I'm guessing there is some conflict (Firefox only?) with this underscore shifting and the clear color mechanism of the webgl renderer.
+Disabling acceleration in Firefox (i.e. setting layers.acceleration.disabled to true) doesn't help.
+Turning terminal.integrated.gpuAcceleration off or setting it to canvas fixes the issue.
+It is font related. 
+It's called "DejaVu Sans Mono" version 2.37
+When using the desktop app in Ubuntu 22.04, the font Droid Sans Mono presents the same behavior. Using other fonts the underscore is rendered correctly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

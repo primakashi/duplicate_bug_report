@@ -1,0 +1,5 @@
+tasks shouldn't prompt for trust when trust has been refused
+Steps:
+Open Visual Studio and wait a moment.
+But if the user quickly closes the initial dialog, there is no pending request for workspace trust, hence the request for workspace trust from the task service will cause the dialog to appear. This behaviour is by design.
+My recommendation would be that the code that the task service executes when the folder/workspace is opened would only read workspace trust state and not request it. 

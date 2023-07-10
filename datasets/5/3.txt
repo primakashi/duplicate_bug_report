@@ -1,0 +1,45 @@
+useEditorAsCommitInput setting generates code 500 error
+
+Does this issue occur when all extensions are disabled?: Yes/No
+
+VS Code Version: 1.69.0
+OS Version: MS windows 10
+When you make an empty message commit, you get an error window.
+
+Steps to Reproduce:
+
+Make changes to a file, stage the file
+Make a commit with an empty message
+Get a Git: Bad status code: 500 message box.
+Previously I would get quick textbox allowing me to enter a one line message
+
+Fix:
+Set useEditorAsCommitInput to false.
+
+Now, as a personal comment I don't understand why the default value of that setting is on. To me it should have been off and people should have had the chance to opt in (or not).It is version 1.69.0.
+I updated the initial comment.
+For whatever reason, on a git repository created after updating to 1.69, the behavior corresponds to what is published in the 1.69 release notes.
+@JeFrRe, do I understand correctly that you are seeing different behaviour depending on which client you used to create the repository? Would it be possible for you to create a recording of the issue that you are hitting uging https://gifcap.dev? Thank you!
+
+I did not see it that way but this is indeed the case. Rather than using an old project of mine, I created a new one and see the results.
+
+GitTest is a repo initialized FROM VSCode => Works.
+GitTest2 is a repo initialized from a dos box. => Fails.
+I found the explanation for the differences between the 2 repositories
+
+The VSCode created one has a user defined in the config while the the Git created one doesn't have a user defined.
+and indeed setting the user in the config fixes the issue.
+
+But the thing is, on my old repository (the one i'm actually complaining about), i do have a user defined!
+For the sake of completeness, i added the output from git commands. Starting from when i click the button. And it's really different than the other cases.
+@JeFrRe, does by any chance the original repository, for which you have created this issue have a space character on the path? If so, I believe that you are running into the issue that is currently being tracked as #154449. The fix will be included in tomorrow's Insiders release (2022-07-12) and the Stable recovery release scheduled for later this week.
+Yes, I do have a space in the repository's path.
+That explains it.
+Thanks
+Since the issue is linked to another bug, i'll close this one.
+/duplicate #154449
+
+
+
+
+

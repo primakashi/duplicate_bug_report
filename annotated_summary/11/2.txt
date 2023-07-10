@@ -1,0 +1,18 @@
+Bash shell script issue with "%" sign 
+I am running VS Code on a Windows host with a WSL (Ubuntu) remote session. 
+Did you notice https://code.visualstudio.com/updates/v1_70#_shell-integration-enabled-by-default? 
+there's actually a simpler way to fix this issue than escaping the % char ending up in the printf format string, by passing it as a separate parameter to printf.
+Yes disabling shell integration will fix this until we have resolved it terminal.integrated.shellIntegration.enabled
+
+
+
+
+
+
+
+
+
+
+
+
+

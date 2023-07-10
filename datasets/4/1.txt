@@ -1,0 +1,28 @@
+The terminal cannot be opened when multiple users use remote-ssh
+Type: Bug
+
+When I used Remote-SSH today, I found that the terminal could not be opened. After checking the log, I found the following error output:
+
+Since the terminal I use is zsh, vscode-server copies my .zshrc to /tmp/vscode-zsh/.zshrc, and the permission of this file belongs to me. As a result, the other users who use zsh as the terminal cannot open the terminal when using Remote-SSH for no permission to overwrite this file.
+
+And I find that when the user uses bash, vscode-server does not copy .bashrc to /tmp/vscode-bash/.bashrc. Therefore, this bug does not exist when bash is used by all users
+
+VS Code version: Code 1.70.0 (da76f93, 2022-08-04T04:38:55.829Z)
+
+
+It looks like I encountered the same problem. When upgrading to 1.70 the zsh shell only opens for the first remote user...
+You can find the error log in OUTPUT of Log (Remote Server), as shown below.
+
+After I rolled the software back to the previous version, the issue was solved.
+Thx, I found the log also now.
+
+Rolling back to 1.69.2 and disabling auto update of VSCode solves the problem currently...
+
+I hope the VSCode team will take care of this issue, for the next release
+I tried also to find the line which is copying the file in the script, but was not really able to find it... I believe the command is hidden somewhere in the __vsc_precmd method
+Thanks for the report, you can workaround this by disabling shell integration automatic injection with "terminal.integrated.shellIntegration.enabled": false and then installing it manually in your .zshrc:
+@Tyriar thanks, your workaround works!
+@Tyriar yes thanks, I was having to go back to the previous release until @jinzcdev sent me here!
+This is fixed in that it will no longer block the terminal from being created, as @roblourens called out in #157900 though we need to make sure that multiple users are able to write the same file. We could perhaps solve this by moving the zsh shell integration files into their own folder in the bundle and just use that?
+@Tyriar is this workaround still valid or should we be waiting for an update in vs code?
+it's fixed in insider's @johncadengo, it's reopened bc of some complications that the fix has caused

@@ -1,0 +1,42 @@
+Sticky Scroll: Go to definition jumps to definitions but stay hidden behind sticky scroll layout
+Does this issue occur when all extensions are disabled?: Yes
+VS Code Version: 1.70.0
+OS Version: Ubuntu 20.04.2 LTS
+Steps to Reproduce:
+Have a definition just hidden under the sticky scroll layout.
+If you try to jump to that particular definition the cursor jumps to that position but the definition stays hidden under the layout.
+Similar to #157394 and #157175
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

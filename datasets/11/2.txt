@@ -1,0 +1,18 @@
+Bash shell script issue with "%" sign 
+I'm using VSCODE for my ssh sessions. Since the July 2022 update, whenever I try to execute a command that has the % sign I get one of those two print errors:
+bash: printf: '\': invalid format character
+bash: printf: 'Z': invalid format character
+I tried a different ssh client and the issue doesn't appear, so it's something with this update. Is anyone aware of a solution?
+Did you notice https://code.visualstudio.com/updates/v1_70#_shell-integration-enabled-by-default? Please try disabling shell integration to see if this change to the default has triggered your issue.
+Yes, that did the trick. Thanks!
+It's to do with 633 E:
+builtin printf '\033]633;E;echo '\''%'\''\007'
+bash: printf: `\': invalid format character
+Same problem in zsh:
+@Tyriar, there's actually a simpler way to fix this issue than escaping the % char ending up in the printf format string, by passing it as a separate parameter to printf.
+I have left a comment in the linked pr as well: https://github.com/microsoft/vscode/pull/157352/files#r939627065
+builtin printf "\033]633;E;%s\007" "$__vsc_current_command"
+@ryenus that's much nicer if it works 👍
+It should, as the same approach is already used in __vsc_update_cwd(), and __vsc_command_complete().
+BTW, thank you for being open and kind 👍
+

@@ -1,0 +1,20 @@
+Terminal colors regression
+This is by design as we've have changed the default minimum color contrast to be 4.5 for accessibility reasons, you can change it to use original theme colors by setting "terminal.integrated.minimumContrastRatio": 1
+@meganrogge looks like the min contrast setting
+The following powershell core code will reproduce the problem:
+write-host "`e[mNormal `e[93m Yellow `e[41m YellowOnRed `e[97m WhiteOnRed `e[m"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

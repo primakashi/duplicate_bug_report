@@ -1,0 +1,15 @@
+Revealing in editor is not aware of sticky lines
+It should be either disabled or maybe better have very limited context (a single line max?)
+Find references:
+This is a general problem with revealing ranges in the editor. The code that reveals ranges is not aware of the sticky scroll sitting at the top of the viewport and doesn't scroll sufficiently.
+In the original screenshot, I also noticed that line 153 is repeated 3 times, I think that is already solved on main via 2ecea7f.
+Let's use this issue to track the problem that revealing is not aware of sticky scroll.
+
+
+
+
+
+
+
+
+

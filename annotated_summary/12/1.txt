@@ -1,0 +1,39 @@
+New rebase conflicts resolution completely broken. 
+Version: 1.70.0
+I would love the ability to be able to easily toggle between the 3 way merge editor and the old merge editor.
+When you enable 3-way merge editor(i.e. set "git.mergeEditor": true), and open conflicted file from Explorer, merge conflict isn't highlighted and it looks like plain text.
+I rebase a branch with a single word different, I get everything as a conflict and can't see where is the difference is.
+I should see only the line with the user_rst shown as a conflict, not the tens of lines I currently have.
+Even disabling the Merge Editor still opens a window with the conflicts...
+@alexisfrjp I just reverted to 1.69.0 and all is working fine again!
+Unfortunately you need to reload/restart VS Code after toggling that setting.
+My original post is for being able to toggle back and forth easily.
+i have uninstalled / reinstalled vscode from the website but it still hasnt fixed the issue
+Disabling Git: Merge Editor turns on the highlighting back
+Now you are supposed to do merge conflicts in your "Source Control" tab. Here when you click on a file with conflicts, it opens a brand new merge conflict system. 
+If you don't like this system, you can disable it, which enables back the old function by disabling "Git: Merge Editor" in your preferences as @carloscbl said.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

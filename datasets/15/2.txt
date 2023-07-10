@@ -1,0 +1,24 @@
+tasks shouldn't prompt for trust when trust has been refused
+Repro steps from @sbatten:
+Open vscode folder (not trusted)
+Get the default trust prompt
+Don't trust
+Immediately prompted for trust from tasks
+Sorry for the delay but I just got to look into this issue. I am reopening this bug as even with the changes from the linked pull request I am able to reproduce the problem with the latest Insiders build.
+Let me provide some context around the workspace trust service. The workspace trust service internally manages work trust requests and while multiple workspace trust requests can be initiated, but all these "pending" requests share the same promise. As soon as the workspace trust request is actioned upon, all requests are being "resolved" with the decision.
+Here is the code flow that is happening right now when an untrusted folder/workspace is opened:
+Workspace trust service displays the initial workspace trust dialog.
+Task service is attempting to list tasks, so it requests workspace trust.
+If the task service requests for workspace trust while the initial dialog is shown things will work as expected, since the tasks service will just receive the promise that will be resolved when the initial dialog is closed. But if the user quickly closes the initial dialog, there is no pending request for workspace trust, hence the request for workspace trust from the task service will cause the dialog to appear. This behaviour is by design.
+My recommendation would be that the code that the task service executes when the folder/workspace is opened would only read workspace trust state and not request it. The task service should request for workspace trust on subsequent actions taken by the user. Happy to get on a call to discuss this further if you want.
+
+
+
+
+
+
+
+
+
+
+

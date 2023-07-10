@@ -1,0 +1,20 @@
+Trust dialog prompt appears even when disabled in settings
+Steps:
+Open Visual Studio and wait a moment.
+Get the default trust prompt
+Don't trust
+Immediately prompted for trust from tasks
+This has started happening when updating to version 1.71.0, it didn't happen with the previous version
+I only was able to fix it by reinstalling VS Code, no update of the settings managed to do the trick.
+If the task service requests for workspace trust while the initial dialog is shown things will work as expected, since the tasks service will just receive the promise that will be resolved when the initial dialog is closed. But if the user quickly closes the initial dialog, there is no pending request for workspace trust, hence the request for workspace trust from the task service will cause the dialog to appear. This behaviour is by design.
+
+
+
+
+
+
+
+
+
+
+

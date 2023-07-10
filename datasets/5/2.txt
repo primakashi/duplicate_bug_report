@@ -1,0 +1,16 @@
+Git amend produces 500 error
+Does this issue occur when all extensions are disabled?: Yes
+
+VS Code Version: 1.69.0
+OS Version: Darwin x64 21.5.0
+Steps to Reproduce:
+
+Create a commit
+Add some changes
+Commit amend the commit (... > Commit > Commit All (Amend) )
+Error code:
+Running git commit --amend from the command line works
+see if #154449 helps you
+Yes, unchecking the Git: Use Editor As Commit Input setting fixes the issue
+@DevelPaga, glad to hear that disabling git.useEditorAsCommitInput resolved this issue.
+Closing this as duplicate of #154449.

@@ -1,0 +1,33 @@
+Views location is not getting updated when switching profiles 
+I think this happened because I was testing profiles. My view locations have been reset.
+Found an easy repro:
+Have 2 windows open (not sure if this step is needed)
+Disable profiles in settings (not sure if this step is needed)
+Restart.
+Enable profiles in settings
+Restart
+In one of the windows run "Settings Profiles: Create an Empty Settings Profile" and create a new empty profile
+See that your new profile gets used in just that window 
+In that same window run "Settings Profiles: Switch" and choose your default profile
+See that your default profile is applied, but view locations are reset 
+Create an empty profile P1 and move Timeline and Outline views to secondary sidebar as separate view containers
+Create an empty profile P2
+Switch from P2 to P1
+Timeline and Outline views are not moved to secondary sidebar and remain in explorer
+Refreshing the window fixes it.
+Reloading does not fix my issue.
+interesting, looks like this is specific to generated view containers, as moving an entire container from activity bar to secondary side bar is reflected correctly
+
+
+
+
+
+
+
+
+
+
+
+
+
+

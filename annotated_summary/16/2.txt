@@ -1,0 +1,17 @@
+Option to configure VSCode settings in sub-folders
+I wish to configure VSCode settings in sub folders, and not only in the root directory.
+For example, I have a monorepo project where one of my application is a backend one implemented with Nest.js.
+So I have configured in the root folder, within the .vscode/settings.json file the material-icon-theme.activeIconPack option.
+However, I also have a react application with redux. 
+Did you try setting up a multi-root workspace in which each of your applications is a separate root? 
+They're the only context in which i use CodeLens, which exposes "Run Test" and "Debug Test" for each test method. Disabling it globally and re-enabling it in /Tests/.vscode/settings.json would be great - much better than constant toggling.
+On the other hand, overriding a global (or single-folder workspace) setting by adding a one-liner settings.json to a subfolder is as simple and intuitive as it gets. 👍
+As far as I understand this VSCode workspace allows me to set only folders as root which are in the root level. But, my folders in which I need this separation are inside an other folder.
+I want to configure each ROOT(x) with other VSCode config
+No, each root folder in your MR workspace can be located anywhere. They don't have to be siblings, nor even in the same subtree.
+Can VSCode pickup on that, and apply the settings from the smaller projects .vscode/settings.json to their subtree and descendant files?
+FYI Currently we are working on a multi root workspace where you can have multiple root folders.  This feature is available only in insiders. 
+@xujintao it depends a lot on your project structure and language. For Dart/Flutter, it's a little wonky without #45470, but we have made some improvements to find our own project roots instead of using multi-root workspaces. 
+Another use case for this is submodules: I have a project composed of several submodules, one which has different linter rules. It would be nice to be able to have my editor pick up on the submodule's .vscode/settings.json file and, say, set the indentation level for files in that directory.
+I'm even more surprised that it's been an open suggestion for 4.5+ years and not yet implemented.
+

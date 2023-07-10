@@ -1,0 +1,16 @@
+Terminal doesn't work and there is no error message after upgrade.
+Yesterday, there was an upgrade. I tried to restart my vscode to apply the upgrade. After the restart, the terminal stopped working.
+I found this error log in the file remoteagent.log.
+It seems that this folder is occupied by other users. And when I tried to delete this folder and reload vs-code, the terminal resumed.
+So, how can I change the default path for zsh?
+I'm getting the same error when connecting to a multi-user system with the ssh extension.
+The terminal cannot be opened when multiple users use remote-ssh
+When I used Remote-SSH today, I found that the terminal could not be opened. After checking the log, I found the following error output:
+[2022-08-09 15:52:42.302] [remoteagent] [error] ["Error: EACCES: permission denied, copyfile '/home/{myuser}/.vscode-server/bin/da76f93349a72022ca4670c1b84860304616aaa2/out/vs/workbench/contrib/terminal/browser/media/shellIntegration-rc.zsh' -> '/tmp/vscode-zsh/.zshrc'"]
+Since the terminal I use is zsh, vscode-server copies my .zshrc to /tmp/vscode-zsh/.zshrc, and the permission of this file belongs to me. As a result, the other users who use zsh as the terminal cannot open the terminal when using Remote-SSH for no permission to overwrite this file.
+And I find that when the user uses bash, vscode-server does not copy .bashrc to /tmp/vscode-bash/.bashrc. Therefore, this bug does not exist when bash is used by all users
+VS Code version: Code 1.70.0
+After I rolled the software back to the previous version, the issue was solved.
+Rolling back to 1.69.2 and disabling auto update of VSCode solves the problem currently...
+Thanks for the report, you can workaround this by disabling shell integration automatic injection with "terminal.integrated.shellIntegration.enabled": false and then installing it manually in your .zshrc:
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"

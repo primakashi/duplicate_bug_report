@@ -1,0 +1,66 @@
+Loses text when maximizing the integrated terminal
+Issue Type: Bug
+
+When I maximize the terminal, only visible text at the bottom of the original size terminal remains. All the text above (which I can see if I scroll up) disappears and they won't come back even if I minimize the terminal back.
+VS Code version: Code 1.60.2 (7f6ab54, 2021-09-22T12:00:31.514Z)
+OS version: Windows_NT x64 10.0.22000
+Restricted Mode: No
+@zadjii-msft when resizing the viewport to include more columns, the normal behavior of a terminal is to push the scrollback back into the viewport, but WT/conpty seems to assume the scrollback remains. Is there a way to change this behavior or do we need a special mode that handles resizes differently?
+That's pretty much not going to be possible unfortunately. I tried this out a few years back but it was only ever worse than without it. Since conpty doesn't actually store any scrollback, it can't really push the scrollback rows back into the viewport - those rows are already gone.
+
+I tried doing something wacky then that presumed there was a "virtual top" to conpty where the previously-scrolled-back rows were present above that virtual top, but that ended up being worse. The virtual top ended up being to hard to track and ended up getting corrupted anyways.
+
+wait...
+
+when resizing the viewport to include more columns
+
+did you mean more rows? I suppose the point remains the same...
+
+We did end up adding a flag to conpty for the Terminal that was "don't repaint the screen on a resize". That might work for what you want. It's been a while since I worked on all this (and pretty promptly flushed that mental cache). IIRC, if you turn that on, conpty assumes that the hosting terminal is going to handle the resize just the same as the conpty will, and then basically emits nothing during the actual resize. So as long as you keep the contents of the viewport the same as what conpty would expect, then everything should work out fine.
+
+That's all handled in https://github.com/microsoft/terminal/blob/0d5af3fedcb8d23986ae75a014bc65e46fefd2a2/src/cascadia/TerminalCore/Terminal.cpp#L232. microsoft/terminal#4741 and microsoft/terminal#4903 are particularly relevant, but everything in the git blame for that method is likely useful.
+
+We've also still got some weird edge cases around reflowing that I'm not entirely sure what's going on, but that's maybe less relevant to this discussion.
+@zadjii-msft yeah I did mean rows. Thanks for the info, I know that conpty now emits a win32 input mode, does it emit anything similar to say something like "I'm conpty", or "resizing won't push scrollback down"? Feels a little wrong to piggy back on win32 input mode as something else might adopt that in the future.
+xterm.js issue: xtermjs/xterm.js#3513
+Oh sorry, that's confusing. Those are actually two separate flags to conpty that got added in a really small window. There's the aforementioned --win32input flag for telling conpty to request win32-input-mode, but then there's --resizeQuirk for "I know what I'm doing, I'm hosting a conpty, do the new resize thing". I never really polished it for external use, it was added in the bugfix sprint for Terminal 1.0 so it's a little quirky. We didn't want to inadvertantly break someone who was relying on the old behavior, but never had the time to really evaluate
+
+if the old behavior was ever correct
+if the new behavior would work in general for everyone.
+My worry was about point 2 - I was worried that running cmd.exe inside something like gnome-terminal in wsl with --resizeQuirk on by default would be more broken than today, which is what I was trying to avoid.
+
+Relevant source: https://github.com/microsoft/terminal/blob/6268a4779c9b3f49b7f3c30471bda7ae292ac423/src/winconpty/winconpty.cpp#L100-L113
+This is a defect that greatly affects the experience
+I have also encountered this problem. But this problem only occurs on Windows terminal, not on linux, and it doesn't occur on Windows VSCode which SSH remote connect to linux.
+yes，I also had this problem
+It is common bug for Windows programs, e.g. Intellij:
+
+video:
+
+https://www.youtube.com/watch?v=owrgc3gnoWg
+
+issue:
+
+https://youtrack.jetbrains.com/issue/IDEA-290119/Terminal-output-is-lost-on-terminal-vertical-resizing
+It seems to be an exclusive mistake of conpty in win11, and I can't reproduce it on win10 and Windows server 2022.
+It is NOT exclusive to Windows 11. See my video linked above.
+I think it may be a region specific bug. My colleagues from Poland also have this issue. Maybe it is related to encoding, because Microsoft uses weird encoding standards like "windows-1250", "windows-1252" and other non-standards for different countries.
+Conpty support is only available from Windows 10 build 18309, that's probably why you see it on some but not others:
+When using winpty it may work but a lot of other things degrade, it's a worse experience overall.
+@Tyriar I am using Win 11 and I am getting the same text trimming issue while minimizing the terminal , can anyone tell me in decent way that what I need to do ??I found working solution. I moved from Windows to MacOS and now this issue is gone. You can also switch to Linux. There are also other benefits of this move:
+
+encoding is now standard UTF-8 instead of non-standard WIN-123456,
+lines end with standard \n instead of non-standard \r\g\b,
+unix terminal is way better than cmd,
+if you prefer PowerShell you can install it easily.
+Switching to Linux is free, switching to MacOs is not free but their devices are really good, so it is worth consideration.
+As a macOS and Linux user, this is cringe.
+I don't know if you helped investigating this issue. I tried at least. I recorded video presenting this bug and reported it to IntelliJ developers and here to VS Code developers.
+
+It has been months of not being able to use terminal on Windows properly, not only in apps mentioned, but in any app that uses terminal, including Windows Terminal.
+
+I provided working solution, which is switching to other operating system. It may be useful for some people. For some people it may not. But it is the only workaround we have, at least for now.
+
+I strongly encourage people to try using UNIX-like systems, and I provided valid arguments for it. Unless there is something I don't know and Windows is now able to use common accepted standards.
+
+I hope you will live cringe-free life from now. Have a nice day.

@@ -1,0 +1,111 @@
+Monolithic structure, multiple project settings
+I was wondering if it is possible for VSCode to pick up on multiple .vscode/settings.json
+For instance if you are working in an monolithic environment with multiple smaller projects inside it, and each have their own .vscode/settings.json.
+Can VSCode pickup on that, and apply the settings from the smaller projects .vscode/settings.json to their subtree and descendant files?            
+Wanted effect:
+monolithic-project/small-project1/.vscode/settings.json applies to monolithic-project/small-project1 and all descendant files.
+monolithic-project/small-project2/.vscode/settings.json applies to monolithic-project/small-project2 and all descendant files.
+Supporting folder settings at any level is a good idea and is similar to editor config.
+FYI Currently we are working on a multi root workspace where you can have multiple root folders. In this case settings under each root folder are applied to the resources under the respective folder (just as you mentioned). But all such folders should be root folders (small-project1, small-project2). This feature is available only in insiders. See #28344 for more details.
+Please close this request, if multi root workspaces full fill your requirements
+Thank for the reply, I am aware of the progress in this area, but if you
+have a monolithic repo with multiple small projects inside that lives on
+the different levels on the filesystem and you add the root of the repo as
+a root in a multi root workspace, and then you add folders from within the
+project root to appear at top level, it will possibly break the experience
+of quick open, where the same file would appear multiple times, the same
+goes for search, or I would have to manually exclude the folders that has
+been added as a workspace roots from the project root's file system.
+
+I think the experience would be a lot nicer if VSCode could handle
+multiple. vscode roots and make them apply to their respective sub trees.
+
+It would really shine if it could pick up on launch.json as well so I could
+choose the list of available launch profiles based on the active file in
+the editor.
+I raised a case that I think covers this (but also a bit more) at #45399. This extends to more than just settings, but also launch configs/etc.
+You're right it just extends to multiple .vscode directories. Settings, launch, tasks and etc.
+I have landed in a similar situation. Is this resolved in the latest version?
+Unfortunately is still experience exactly the same as stated in the issue
+description.
+Is this in the backlog of issues to be fixed? Any workaround till then?
+after #45399 then #45470
+So, do vscode support mono or not? if not, which issue should be followed?
+@xujintao it depends a lot on your project structure and language. For Dart/Flutter, it's a little wonky without #45470, but we have made some improvements to find our own project roots instead of using multi-root workspaces.
+Any update on this? Still would be a really helpful feature!
+It would be really nice to have this... I have different settings for my personal projects and for the company projects, and I don't wanna add a .vscode folder in a repo where I'm the only one who'd be using it. Also there wouldn't be a need to add an environment-specific entry to .gitignore if this feature was implemented.
+
+I'd expect something like this to work:
+
+git_workspace/
+├── .vscode
+│   └── settings.json # global settings, my preferred ones
+├── my-personal-projects/
+│   └── project1/
+│       └── .git/
+└── company-projects/
+    ├── .vscode
+    │   └── settings.json # local settings, overrides some of my personal ones
+    ├── project2/
+    │   └── .git/
+    └── project3/
+        └── .git/this would be awesome. are there any updates?
+this would be awesome. are there any updates?
+Another use case for this is submodules: I have a project composed of several submodules, one which has different linter rules. It would be nice to be able to have my editor pick up on the submodule's .vscode/settings.json file and, say, set the indentation level for files in that directory.
+This is also important for Yarn 2/3 PNP setups, which have to specify which sdks are available. For example, two of our sub projects require different versions of TypeScript (don't ask) and have their own .yarn/sdks folder, but we have to open the project folder separately in order for VSCode to correctly choose the right TypeScript version for each project.
+This is crucial for configuring different auto import methods. We need project-relative in our libs and non-relative in our consuming applications.
+Jumping in on this as it seems to be the only way to set language associations by filetype. I've got a lot of IaC projects which have YAML files with different syntaxes I'd love to be able to set "files.associations" with per-subfolder, rather than just by root project.
+It would help with AWS SAM projects where you can have a folder tree structure like this:
+Those two Lambda functions might run with different Python runtimes. You might even add a third Lambda function that runs with Node.js instead of Python.
+It's been 5 years and this is crucial for monorepos...
+I was amazed to find that it wasn't already a longstanding feature. I just assumed that nesting/inheriting settings would be a thing because of course it would.
+
+I'm even more surprised that it's been an open suggestion for 4.5+ years and not yet implemented.
+
+It must be more complicated that it seems at the conceptual level!
+There are a lot of things to consider e.g. in typescript if each root in the workspace use a different version of TS, should there be spinned up a language server per root, or is it up to each language server to support multiple versions of the compiler? Which part of the "editor platform" should have which parts of the responsibilities.
+My workaround (for my use case of formatting all files in a specific
+subfolder as JSON) was to add a file filter that included the path to
+Files: Associations:
+I could see this being easily extended for others, if they're only after
+similar outcomes.
+While that is a great workaround for very simple extensions that are just "running a command against the codebase" I don't see it work with a common, but a quite more complex set of extensions such as language servers at different versions of the language.
+
+Actually if we just consider the JSON formatter, what should happen if the roots define their own formatting rule settings for the json formatter extenstion. Where should the implementation burden live, in the vscode platform or at the extension authors.
+
+Personally I think it would work best if the extenstion authors should handle this, so they could decide what it would mean to run in a multi root environment, but I don't see a lot of adoption in that case, but I don't see an one-size-fits-all solution that'll work great if the vscode should handle all of it.
+
+The difficult thing here is to "guess" what extension API that'll resolve as much the platform can offer to the authors to get them as long of the way as possible and the needed "hooks" for the extensions authors to fill in the blanks to give the users a good experience.
+@sandy081 I'm interested in solving this, can I get directions?
+I am afraid that this can be contributed through a PR given that it is a big plan item. But we would appreciate to collect ideas which can help in designing the solution. Thank you.
+Hi all
+Also using a monorepo with a lot of projects, in several languages, with several, unaligned directory hierarchies.
+
+Using a multi-root workspace I can manually add each 'project' folder individually and have a seamless development experience (mainly python+jupyter).
+So, if there was a setting in the a my.code-workspace file which would allow the system to auto-discover project roots, that would be a very good start.
+
+Eg instead of having something like:
+A basic way for the auto-discovery to work is by browsing all sub folders and check the presence of an .vscode/settings.json
+It could also be a more featured glob pattern for instance.
+I too would love to see this feature implemented. My use case is for javascript/typescript.
+
+As a simple example, I have an angular project web-client, a server-side project app-engine; both of which depend on project models, which follow the folder structure:
+
+- apps
+  - web-client
+  - app-engine
+- libs
+  - models
+- ... other stuff
+app-engine and models target ESM, not commonjs.
+
+Now, ESM requires the imports end with the file extension. So to run the server, it must use the file extension, and the same goes for models because it is going to be used by app-engine. However, web-client is built by the angular cli, and I am not sure if it's the cli or webpack, but the build process fails if I use file extensions inside web-client. Since models is a package (i.e. it has a package.json file with "type": "module"), angular does not complain about file extensions inside models.
+
+Thus, I need the following vscode settings inside app-engine and models, but not in web-client
+
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "typescript.preferences.importModuleSpecifierEnding": "js"
+Having folder-level settings.json work the same way package.json or tsconfig.json works, would be wonderful.
+
+Workaround:
+Currently, I am having to exclude the individual project folders in the root .vscode/settings.json, and adding them as workspace folders in the .code-workspace file, then adding the folder-level .vscode/settings.json in order to get what I need.

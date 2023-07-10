@@ -1,0 +1,5 @@
+When I used Remote-SSH today, I found that the terminal could not be opened. 
+Terminal doesn't work and there is no error message after upgrade.
+Rolling back to 1.69.2 and disabling auto update of VSCode solves the problem currently...
+hanks for the report, you can workaround this by disabling shell integration automatic injection with "terminal.integrated.shellIntegration.enabled": false and then installing it manually in your .zshrc:
+

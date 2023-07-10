@@ -1,0 +1,8 @@
+Loses text when maximizing the integrated terminal
+When I maximize the terminal, only visible text at the bottom of the original size terminal remains. All the text above (which I can see if I scroll up) disappears and they won't come back even if I minimize the terminal back.
+Since conpty doesn't actually store any scrollback, it can't really push the scrollback rows back into the viewport
+Steps to Reproduce:
+Run commands on the terminal until the top of the terminal is full
+Run another command. The top line will be deleted
+Scroll up to see that the previous line is deleted
+I provided working solution, which is switching to other operating system.

@@ -1,0 +1,91 @@
+VS Code was lost on shutdown with pending update 
+It was the second time ,it happend.
+I download VScode's update patch when I was coding , and then shut down the computer and forgot to update it.
+Next day I turn the computer on and can't find VScode anywhere , all the file was empty.
+@manglobe What are your machine specs? Is your system managed by a company/administrator?
+My system managed by myself
+Let's try to detect if the system is about to be shutdown, we don't do anything.
+Sounds like you told it to install the patch "Later". So after the reboot it messed up patching. I've had this happen to me about 2-3 times now. Except I tell it to update immediately, it gets halfway and then fails.
+Attached log as requested by the error message
+vscode-inno-updater.log
+VS Code
+Failed to install VS Code update. Please download and reinstall VS Code.
+Please attach the following log file to a new issue on GitHub:
+C:\Users\USERNAME\AppData\Local\Temp\vscode-inno-updater.log
+OK
+Setup
+Unable to execute file:
+C:\Program Files\Microsoft VS Code\Code.exe
+CreateProcess failed; code 2.
+The system cannot find the file specified.
+OK
+@gmariani You seem to have #47841.
+Please read this comment if you can provide more detail: #47841 (comment)
+Please read this one to disable background updates: #47841 (comment)
+Also read this one to provide feedback on our new user setup: #47841 (comment)
+@joaomoreno
+vscode-inno-updater.log
+That's the updater log.
+There was no Error, only Delete.
+Hey @joaomoreno, I've also faced the problem when VS Code decided to update on Windows shutdown, which resulted in the next boot having no VS Code installed on the system. Had to download and install it again 😢
+I just had this issue also. Visual Studio wanted to update on Windows shutting down. Now there is no VS Code installed on the computer.
+Here's my system specs.
+Edit: After reinstalling VS Code to same directory all my extensions are working and code I was working on last loaded right where I left off thankfully... 😅
+Happened to me today.
+Logging in after 'Shutdown anyway' and there's no code editor.
+Happened to me as well. My issue was that I needed to restart VS because I was (I think) having Typescript issues. I closed it, and restarted it (apparently too fast because the old process was still running) and boom, it was gone (no machine restart).
+Happened to me today.
+Logging in after 'Shutdown anyway' and there's no code editor.
+Same thing happend to me.
+Same here,
+I received a warning on exit that it was unable to update due to some locked file. Tried the "try again" button twice and then pressed "Cancel". After that, no VS Code on my computer anymore.
+Similar issue yesterday. Vscode wanted to update an automatic update, computer slowed down to a halt for a second, update failed and rebooted explorer.exe. Now vscode is no longer on my system.
+vscode-inno-updater-1566340881.log
+I can also confirm this problem. Happened yesterday night - after starting the computer again today VSCode is completely gone from my Windows 10 computer. Only a bunch of empty directories left.
+Reinstall it, everything will come back.
+I later found, that when last time computer was shutting down, the updates ran, and did not completed. In the mean time computer shut down.
+So, after i installed it again, everything came back.
+I can confirm this issue, it now happened to me for the 3rd time. Restarted computer, briefly saw a "Pending Updates" dialog popping up with Windows waiting for VS Code to end before shutting down. After reboot, VS Code was gone as described by other users above.
+At least we know we’re not crazy, someone should download the source and see if they can fix it, can’t be too difficult. I may try if I can find some time this week!
+Thank you,
+Dan Chase
+I can confirm this issue, it now happened to me for the 3rd time. 
+Restarted computer, briefly saw a "Pending Updates" dialog popping up with Windows waiting for VS Code to end before shutting down. 
+After reboot, VS Code was gone as described by other users above.
+Microsoft really needs to address this. 
+Just happened again to me.
+I haven’t had it happen since I prevented updates. 
+Running an older version but doesn’t impact me the same way as having to reinstall once a week.
+This happened to me today for the second time. 
+It seems to happened when there is a VS Code update and/or my computer has cumulative system updates (both scenarios occurred today). 
+My solution last time, after restarting my computer with no success, was to uninstall/reinstall VS Code—I believe this happened on 2/3/2022 because that's when I downloaded VSCodeUserSetup-x64-1.64.0.exe.
+I'm using Windows 11 and use Malwarebytes, but I "upgraded" to Win11 in November 2021, and I've used Malwarebytes for at least a year. 
+(I mention Malwarebytes because it mentioned in the thread above.)
+I know that basically I'm describing things that have happened to everyone else, but figured "what the hell" I'll add my experience.
+Before restarting my pc this time, the VS Code shortcut no longer worked but the executable was still available. H
+owever, I got an error message when I tried running it. I checked file/directory permissions and those were fine. So I restarted the pc and now the exe is gone (unins000.exe is still available). I opened system settings and under Apps & Features, VS Code is still listed, but I only have the option to uninstall.
+I've listed the two system updates that occurred today, but since I don't have any updates on or around 2/3/2022 (when I experienced this issue the first time), I don't know if system updates are part of the cause or just a correlation.
+February 9, 2022:
+2022-02 Cumulative Update for .NET Framework 3.5 and 4.8 for Windows 11 for x64 (KB5009469)
+2022-02 Cumulative Update for Windows 11 for x64-based Systems (KB5010386)
+It happened to me too (today) after update KB5010342 was installed
+This is also the 2nd time for me this happened. VScode was waiting on github credentials. Closing VScode triggered the update, which failed due to a process still running (github authorization).
+This issue has been going on for quite some time it appears, I saw another closed thread here on it. Happened to me just now. It is possible VS Code was waiting on my GitHub credentials as well. I shut things down yesterday (closed Code) came back today and it had uninstalled itself. I do recall an update was pending and it required a code restart. Will keep an eye out for details.
+Certainly, this is a bug that is important to fix. I assume people don't like it when their tools disappear >: ). Don't delete code unless there's a way back!
+I've experienced this exact issue no less than 12 times in the past two months. I don't pay attention to how often VS Code is updating, so I'm unsure if it ONLY happens when I close and there is an update, or not. However, every time it happens, it is after closing VS Code. This has caused me to lose several hours of productivity and is frustrating. I'm about to reinstall again, as apparently VS Code self-destructed after/during I shutdown last night. Unfortunately I am stuck using VS Code for the next three weeks, and seeing how this issue has persisted since about 2018 (there are several closed issues on this problem in this repo), I doubt it will be fixed by then.
+Edit: Forgot to mention, when there is an update and I close VS Code, it begins the auto-update. It hangs indefinitely every time. The only way I can end it is by restarting the computer (task manager was useless). This results in the same issue of VS Code being uninstalled.
+That 'code.exe' file is corrupted for me every time this happens. Somehow Windows also says I don't have permissions to it after the fact. Restarting Windows, followed by uninstalling, then reinstalling VS Code is my workaround.
+This is happening to me since going to windows 11 also have malwarebytes. If it's causing such an issue why don't they do check for updates on opening vscode rather than closing vscode?
+happened on my mac today
+code.exe disappeared again on my computer.
+The updater should not be started if system is shuting down.
+code.exe disappeared again today. This issue is very annoying. I don't want to check the update state every time before restart my computer.
+faced the same issue today. I shut down my computer while it was updating something then its gone 😒
+Happened to me too,
+try to open path in win explorer or in run window [win key + r] and paste C:\Users{username}\AppData\Local\Programs\Microsoft VS Code_ replace {username} with actuall logged in user
+hover over the Code.exe file + right click and select Pin to start or Pin to task bar
+Taking off from where @crohref indicated. I suspect that VSCode had an update, and when the program is shut down and it normally would update, something prevented the update, bu tit somehow already removed the old version, and just never moved the new version up out of the _ folder?
+That's my guess.
+I also, just got this issue, and found this thread. I'm probably going to freshly install because I don't think the _ folder is supposed to be there past an update (that's my assumption)
+VS Code should use update method like Chrome, use launcher to choose which version to start.
+Confirming the issue again. But I didn't even update before shutting down. Although it was the first time I shut my laptop down (instead of putting it to sleep) after the VSC update.

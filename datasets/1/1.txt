@@ -1,0 +1,32 @@
+Git Bash is not visible when try to select default terminal profile
+Does this issue occur when all extensions are disabled?: Yes/No
+VS Code Version:
+OS Version:
+After updating VsCode I couldn't see git bash when I tried to select the default terminal profile.
+This is my setting.json
+After that, I thought bc of some reasons the Git Bash is not counted as a profile.
+So I tried to create a new profile by pressing ctrl+shift+p then terminal: select default profile then I pressed configure button of Powershell. And after that when I try to type Git Bash they said I already have a profile with Git Bash name. So I went to my settings.json and I commented the git bash part. But when I tried again to configure PowerShell and type Git Bash they again said A terminal profile already exists with that name!!!
+I can't take the screenshot because when clicking another place the command palette disappears
+After that, I deleted the Code folder from the C:\Users\User\AppData\Roaming\Code
+And I opened VsCode again, But it is still saying I don't have git bash in terminal profile and when i click configure buttons of the profile or try to add it from settings.json they say A terminal profile already exists with that name
+Oh, yes when I change settings.json into this code ---
+It works fine. I can select bash as my default profile!!!!!
+It didn't happen in the previous version so I think it is happening because of the Latest version glitch. (Btw I just signed up in Github) So maybe I broke some rules. Sorry if I break 😞
+(Experimental duplicate detection)
+Thanks for submitting this issue. Please also check if it is already covered by an existing one, like:
+Same issue after upgrade to the new version (vscode 1.57.0)
+I had the same issue after updating to 1.56.0, VSCode couldn't see the installed Git Bash on W7. I fixed it by hardcoding a new terminal profile with an explicit path to Git Bash (this might be related to me having a non-default path to my Git Bash install).
+And after updating to 1.57.0 Git Bash terminal profile disappeared again. I managed to fix that by renaming "Git Bash" profile to "Git_Bash".
+But after deleting cache when I try to type terminal.integrated.defaultProfile.windows and then Git_Bash, I couldn't see Git_Bash in suggestions. Also, there was a yellow underline on Git_Bash. After that, I deleted the Git_Bash word And saved it, and tried to type Git_Bash, there was Git_Bash in the suggestions. After that, there was no yellow underline on the Git_Bash word. Its also a settings.json bug I think.
+Something weird is indeed happening when trying to override "Git Bash", I have the following:
+And it's still opening git bash.
+I think this main UX issue being reported here is when Git Bash isn't detected though, unlike my case above.
+I have the same issue. Existing issues and an answer on stackoverflow seem to suggest that this problem occurs only when your Git Bash is not installed at the standard location (C:\Program Files\Git\bin\bash.exe) and the profile is named exactly "Git Bash".
+We will improve the info provided on hover of the source property.
+Moving my report from #158627 to here since this issue represents the historical issue tracked by the VS Code team.
+VS Code Version: 1.70.2
+I replaced the key-value pair above with the following key-value pair (this was the default install path for me; note that the path could vary if a different git for windows install location was chosen):
+Restarted VS Code, activated the command palette, selected Terminal: Select Default Profile and Git Bash appeared as a dropdown option. Selected Git Bash as the default terminal. Ran python file. Terminal pane opened Git Bash and code executed successfully.
+Thanks for the follow up @arwhyte, we don't look in %PROGRAMFILES(X86)% currently but should:
+You are welcome @Tyriar. I was a bit surprised that C:\\Program Files (x86)\\Git\\bin\\bash.exe would be considered a non-standard git for windows install location as is implied by the additional language added in #158805.
+Anyways, enjoy teaching Python here at the University of Michigan using VS Code. Go Blue, Go VS Code.

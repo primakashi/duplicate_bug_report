@@ -1,0 +1,23 @@
+I would love the ability to be able to easily toggle between the 3 way merge editor and the old merge editor.
+Steps to Reproduce
+When you enable 3-way merge editor(i.e. set "git.mergeEditor": true), and open conflicted file from Explorer, merge conflict isn't highlighted and it looks like plain text.
+Merge conflict should be highlighted like the legacy merge conflict view.
+If you don't like this system, you can disable it, which enables back the old function by disabling "Git: Merge Editor" in your preferences as @carloscbl said.
+Unfortunately you need to reload/restart VS Code after toggling that setting.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

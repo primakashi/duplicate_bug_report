@@ -1,0 +1,15 @@
+Terminal: Select Default Profile fails to locate Git Bash and include as dropdown option
+Does this issue occur when all extensions are disabled?: Python extension not disabled in order to test workaround.
+VS Code Version: 1.70.2
+I replaced the key-value pair above with the following key-value pair (note that the path could vary if a different git for windows install location was chosen):
+Restarted VS Code, activated the command palette, selected Terminal: Select Default Profile and Git Bash appeared as a dropdown option. 
+Selected Git Bash as the default terminal. Ran python file. 
+Terminal pane opened Git Bash and code executed successfully.
+Context: I teach at the University of Michigan School of Information and we use VS Code to introduce students to programming fundamentals. 
+For new students this is a non-trivial workaround. 
+Class starts in a week. :)
+Issue reported earlier but apparently not resolved: #126023, #123684
+Thanks for the issue. 
+Perhaps we should be showing a warning when Git Bash is not detected at the standard paths we check with instructions or a shortcut to configure it. 
+Thoughts @Tyriar ?
+/duplicate #126023

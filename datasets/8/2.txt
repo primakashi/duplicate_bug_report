@@ -1,0 +1,57 @@
+Custom editors cannot be opened when a single-folder workspace has Been Extended To A Multi-Folder Workspace
+VSCode Version: 1.45.1 / Insiders 2020-05-26T15:51:05.752Z
+OS Version: Windows 10 / Mac
+Steps to Reproduce:
+Check out Cat Customs Sample
+Install the extension
+Copy the exampleFiles folder to exampleFiles2
+Open a new VS Code Instance with exampleFiles as root folder
+(Custom Editor works as intended)
+Add exampleFiles2 to the workspace.
+Open example.cscratch in exampleFile2 folder.
+It crashes.
+Does this issue occur when all extensions are disabled?: Yes
+This is a known issue with webviews in general. Converting a single folder to a workspace causes the extension host to restart, which causes any webviews to become detached from the extension that is running them
+Thanks for the reply ;) This also happens for webviews that are opened after the host has been restarted! If this is hard to fix, it would be cool if it could be made more obvious that this is a bug of vscode, not the extension (cause it looks very much like a problem of the extension - for both users and developers of extensions).
+Not knowing much about the webview api, is it possible for the extension to reattach to the webview? Or will it just be left open and the user can, for example, manually copy their unsaved changes out of it then close it?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+Revealing in editor is not aware of sticky lines
+VS Code Version: 1.70.0
+Steps to Reproduce:
+Have a definition just hidden under the sticky scroll layout.
+If you try to jump to that particular definition the cursor jumps to that position but the definition stays hidden under the layout.
+In the original screenshot, I also noticed that line 153 is repeated 3 times, I think that is already solved on main via 2ecea7f.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

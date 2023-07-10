@@ -1,0 +1,53 @@
+Ansi Foreground colors not applied correctly when background color set in terminal
+Issue Type: Bug
+In the terminal after setting a background color with ansi commands the forground is always black.
+The following powershell core code will reproduce the problem:
+write-host "`e[mNormal `e[93m Yellow `e[41m YellowOnRed `e[97m WhiteOnRed `e[m"
+Thanks for the info. I am not seeing the issue in pwsh on a mac, so suspect this has to do with your pwsh version. What version are you using in VS Code vs Windows Terminal?
+Hi Megan, The version of pwsh is the same in all instances
+Like I showed in my original post, in the developer console in VScode xterm.js is properly parsing the ansi sequences, but they just aren't being displayed on the actual terminal canvas properly.
+Doesn't reproduce on Mac, so I suspect it's a conpty issue
+@meganrogge looks like the min contrast setting
+Wow I would think if someone has gone to the trouble to specify both the foreground and background colors explicitly it should be respected regardless of accessibility settings. But more importantly why does it work properly then in the mac version but not under windows as @meganrogge stated?
+Because i have min contrast ratio set to 1
+@natebarkei there's some more discussion about this decision in #146406 (comment), it was a somewhat controversial change and we're thinking about ways to make it easier to surface why to users who think it's an issue. One change we just did was to ensure the hue is retained if the luminance gets flipped (a light yellow will become a dark yellow instead of grey) #156984. I also just added a section to the faq on the website microsoft/vscode-docs@42e2280
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

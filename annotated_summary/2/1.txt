@@ -1,0 +1,15 @@
+VS Code Deleted After Windows 25201.1000 Update
+VS Code was lost on shutdown with pending update
+After restarting, the VS Code shortcut in my toolbar was replaced by the generic unknown windows application icon. 
+Clicking it reported that VS Code was not found and asked if i wanted to delete the shortcut. Searching the main menu for VS Code resulted in the same thing. 
+Typing code . 
+in the terminal also resulted in a command not found error.
+I download VScode's update patch when I was coding , and then shut down the computer and forgot to update it.
+Next day I turn the computer on and can't find VScode anywhere , all the file was empty.
+I've now downloaded and reinstalled VS Code and everything seems to be fine, but just thought you might like to know.
+VS Code version: Code 1.71.2 
+I've now downloaded and reinstalled VS Code and everything seems to be fine, but just thought you might like to know.
+I searched but didn't see that one.
+Sounds like you told it to install the patch "Later". 
+So after the reboot it messed up patching.
+After reinstalling VS Code to same directory all my extensions are working and code I was working on last loaded right where I left off thankfully... 😅

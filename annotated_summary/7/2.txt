@@ -1,0 +1,20 @@
+View locations reset 
+Found an easy repro:
+Create an empty profile P1 and move Timeline and Outline views to secondary sidebar as separate view containers
+Create an empty profile P2
+Switch from P2 to P1
+Timeline and Outline views are not moved to secondary sidebar and remain in explorer
+Refreshing the window fixes it.
+Reloading does not fix my issue.
+
+
+
+
+
+
+
+
+
+
+
+

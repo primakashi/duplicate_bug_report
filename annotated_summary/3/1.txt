@@ -1,0 +1,18 @@
+Loses text when maximizing the integrated terminal
+Top line of terminal deleted when running command
+Steps to Reproduce:
+Run commands on the terminal until the top of the terminal is full
+Run another command. The top line will be deleted
+Scroll up to see that the previous line is deleted
+https://user-images.githubusercontent.com/81090788/188167507-3c88bf6d-9614-42cc-b829-e22e20eabb1b.gif
+Also works with any output (deletes 0 and 1 in this case)
+When I maximize the terminal, only visible text at the bottom of the original size terminal remains. All the text above (which I can see if I scroll up) disappears and they won't come back even if I minimize the terminal back.
+@zadjii-msft when resizing the viewport to include more columns, the normal behavior of a terminal is to push the scrollback back into the viewport, but WT/conpty seems to assume the scrollback remains. 
+Since conpty doesn't actually store any scrollback, it can't really push the scrollback rows back into the viewport - those rows are already gone.
+But this problem only occurs on Windows terminal, not on linux, and it doesn't occur on Windows VSCode which SSH remote connect to linux.
+ It is NOT exclusive to Windows 11. 
+See my video linked above.
+I think it may be a region specific bug. 
+Maybe it is related to encoding, because Microsoft uses weird encoding standards like "windows-1250", "windows-1252" and other non-standards for different countries.
+I provided working solution, which is switching to other operating system. 
+I strongly encourage people to try using UNIX-like systems, and I provided valid arguments for it. Unless there is something I don't know and Windows is now able to use common accepted standards.

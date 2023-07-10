@@ -1,0 +1,67 @@
+Black blocks in terminal at every underscore
+Does this issue occur when all extensions are disabled?: Yes/No
+VS Code Version: 1.70
+OS Version: Browser (Firefox, maybe Chrome)
+Steps to Reproduce: Not sure.
+Reported originally in Gitpod:
+Terminal character display issue in firefox gitpod-io/gitpod#8935
+Black blocks in terminal at every underscore gitpod-io/gitpod#12190
+Underscore shows incorrectly in Terminal gitpod-io/gitpod#12145
+I fully expect the bug to be present upstream (I saw it in gitpod), but I can't open a terminal on https://vscode.dev/ to check if the bug is present there. I would be happy to open up a codespace to see if the issue is present in VSCode web, but I'm not going to pay for Github teams just to file a bug report. Note that I am using Google Chrome Version 104.0.5112.101 (Official Build) (64-bit) on Ubuntu (without any browser extensions active), so this issue isn't just on firefox.
+I've never seen this issue - have you @Tyriar ?
+I haven't seen this either, I'm guessing it's on gitpod's end because you have received 3 reports and we haven't had any.
+Reported at #158522 so reopening.
+From that issue:
+Underscore is handled a little specially as we shift it up when the font would normally render it beyond a cell's bounds to ensure it shows up even on the bottom row. I'm guessing there is some conflict (Firefox only?) with this underscore shifting and the clear color mechanism of the webgl renderer.
+In case it helps, I cannot reproduce on Firefox on macOS but I can on Linux.
+@barisione also good to know, thanks. If you have time it would also be good to know if it happens in the VS Code desktop app (electron/chromium) or chrome/chromium on Linux.
+I'm using macOS at the moment but I asked a couple of colleagues to test.
+Both Firefox 100.0.2 (64-bit) and Chrome 103.0.5060.53 (Official Build) (64-bit) are affected.
+The VSCode desktop app is not affected.
+This happens both on Fedora 34 using X11 and KDE, and Ubuntu 20.04 with a standard GNOME desktop.
+Disabling acceleration in Firefox (i.e. setting layers.acceleration.disabled to true) doesn't help.
+Turning terminal.integrated.gpuAcceleration off or setting it to canvas fixes the issue.
+This is on Lenovo laptops with Intel graphics.
+lspci reports this on the Fedora machine:
+And this on the Ubuntu one:
+This is a snippet from glxinfo's output:
+My colleague @charles-at-undo did some more experimenting and found out that underscores have problems in the desktop application. They disappear if acceleration is turned off. Not sure if it's the same problem or not but hopefully this is helpful.
+See this_that in this screenshot:
+And how it appears as this that in this one:
+I can reproduce this when running vscode in a devcontainer
+When using DOM renderer, the underscore characters completely disappears.
+Canvas renderer works fine:
+The font used here is DejaVu Sans Mono version 2.37, however when I pulled it out of the devcontainer and installed it on my Windows machine, it has no issues
+Except the appearance is a little different from Canvas renderer, where the underscore characters are connected.
+and DOM renderer, where characters are a little bit wider.
+It is font related. The devcontainer also has Cascadia Mono which works fine.
+@yume-chan what's the problem font?
+It's called "DejaVu Sans Mono" version 2.37
+I think I can confirm the conclusion reached by @yume-chan. When using the desktop app in Ubuntu 22.04, the font Droid Sans Mono presents the same behavior. Using other fonts the underscore is rendered correctly.
+Font from #158975 is "'Droid Sans Mono', 'monospace', monospace"
+Weird:
+The no underscore when GPU acceleration is off is tracked in #159110
+A better workaround is to use a different font, such as Fira Code, Hack, Iosevka, etc.
+This affects webgl only.
+Found the issue. This https://github.com/xtermjs/xterm.js/blob/b68f82078b5f6fb336afd39a98685e489cca7c79/addons/xterm-addon-webgl/src/atlas/WebglCharAtlas.ts#L563 clearRect ends up drawing a #000000FF background instead of the natural color, so the full temp canvas texture is used which explains the odd size of the rectangle.
+I was seeing this earlier in the week doing TPIs on Linux... but now I don't today so seems fixed.
+After all, what's the solution to the black box produced by the underscore character?
+The last update resolved this issue.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

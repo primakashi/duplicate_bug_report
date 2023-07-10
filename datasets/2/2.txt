@@ -1,0 +1,9 @@
+VS Code Deleted After Windows 25201.1000 Update
+Type: Bug
+Not sure what version of VS Code I was running previously, but I tend to l keep things as up to date as possible, but I just received notification of a Windows update, so I ran the update with a restart.
+After restarting, the VS Code shortcut in my toolbar was replaced by the generic unknown windows application icon. Clicking it reported that VS Code was not found and asked if i wanted to delete the shortcut. Searching the main menu for VS Code resulted in the same thing. Typing code . in the terminal also resulted in a command not found error.
+I've now downloaded and reinstalled VS Code and everything seems to be fine, but just thought you might like to know.
+I've now downloaded and reinstalled VS Code and everything seems to be fine, but just thought you might like to know.
+Glad to know you're unblocked, thanks for letting us know!
+I searched but didn't see that one.
+thnx for the great product btw, keep up the awesome work

@@ -1,0 +1,28 @@
+Cmd+F no longer goes to active editor
+Rather now opens the find widget in the explorer.
+The tricky thing about using "ctrl+f" for this feature is that it does not search (does not "find") anything — it does not really respect "Find" semantics
+1.69.2 Opens the find widget in editor
+1.70 Opens the find widget in File Explorer
+It breaks workflows of opening files and searching for content.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
